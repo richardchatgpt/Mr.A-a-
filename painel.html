@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Pedidos - Açaí Delícia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Painel de Pedidos</h1>
+    </header>
+
+    <section id="pedidoSection" class="container">
+        <h2>Pedidos Recentes</h2>
+        <div id="pedidoList">
+            <!-- Lista de pedidos será inserida aqui -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Açaí Delícia. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Função para exibir os pedidos no painel
+        function exibirPedidos() {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            let pedidoList = document.getElementById('pedidoList');
+            pedidoList.innerHTML = ''; // Limpa a lista antes de adicionar novos pedidos
+    
+            if (pedidos.length === 0) {
+                pedidoList.innerHTML = "<p>Não há pedidos no momento.</p>";
+            }
+    
+            pedidos.forEach(function(pedido, index) {
+                let div = document.createElement('div');
+                div.classList.add('pedido');
+                div.setAttribute('data-index', index); // Adiciona o índice ao elemento
+    
+                let html = `<strong>Pedido #${index + 1}</strong><br>`;
+                html += `<strong>Nome:</strong> ${pedido.nome}<br>`; // Exibe o nome do cliente
+                html += `<strong>Tamanho:</strong> ${pedido.tamanho} - R$ ${pedido.total.toFixed(2)}<br>`;
+    
+                if (pedido.adicionais.length > 0) {
+                    html += `<div class="adicionais"><strong>Adicionais:</strong> ${pedido.adicionais.join(', ')}</div>`;
+                }
+    
+                if (pedido.frutas.length > 0) {
+                    html += `<div class="frutas"><strong>Frutas:</strong> ${pedido.frutas.join(', ')}</div>`;
+                }
+    
+                html += `<strong>Contato:</strong> ${pedido.contato}<br>`;
+                html += `<strong>Total:</strong> R$ ${pedido.total.toFixed(2)}<br>`;
+    
+                // Adiciona o botão para marcar como pedido feito
+                html += `<button class="marcar-feito" data-index="${index}">Marcar como Feito</button>`;
+    
+                div.innerHTML = html;
+                pedidoList.appendChild(div);
+            });
+    
+            // Adiciona o evento de clique para os botões "Marcar como Feito"
+            document.querySelectorAll('.marcar-feito').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    let pedidoIndex = button.getAttribute('data-index');
+                    confirmarPedidoFeito(pedidoIndex, button);
+                });
+            });
+        }
+    
+        // Função para confirmar se o pedido foi realmente feito
+        function confirmarPedidoFeito(index, button) {
+            // Pergunta se o pedido foi realmente feito
+            let confirmacao = confirm("Esse pedido foi realmente feito?");
+            if (confirmacao) {
+                removerPedido(index, button);
+            }
+        }
+    
+        // Função para remover o pedido do localStorage e da tela
+        function removerPedido(index, button) {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    
+            // Remove o pedido da lista
+            pedidos.splice(index, 1);
+    
+            // Atualiza o localStorage com a lista de pedidos atualizada
+            localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    
+            // Remove o pedido da tela
+            button.closest('.pedido').remove();
+        }
+    
+        // Chama a função para exibir os pedidos ao carregar a página
+        window.onload = exibirPedidos;
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ecbcf9;
+    color: #333;
+}
+
+header {
+    background-color: #ecbcf9;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.container {
+    padding: 30px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+select, input[type="tel"], button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.opcoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
+}
+
+label {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo do label */
+    font-size: 1em;
+    flex-wrap: wrap;
+    width: 100%; /* Garante que o label ocupe toda a largura do contêiner */
+    word-wrap: break-word;
+    margin: 5px 0; /* Espaçamento entre os labels */
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0; /* Evita que o checkbox encolha */
+}
+
+h3#total {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Mesmos estilos anteriores, acrescente o seguinte para a tela de resumo */
+
+#pedidoResumo {
+    margin-bottom: 20px;
+}
+
+#pedidoResumo ul {
+    list-style: none;
+    padding: 0;
+}
+
+#pedidoResumo li {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+}
+
+#pedidoResumo .adicionais,
+#pedidoResumo .frutas {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+#pedidoResumo .adicionais span,
+#pedidoResumo .frutas span {
+    color: #28a745;
+}
+
+button {
+    background-color: #bd8a3c;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 12px 30px;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d1aa6f;
+}
+
+/* Painel de Pedidos */
+.painel-pedidos {
+    padding: 20px;
+}
+
+#pedidoList {
+    margin-top: 20px;
+}
+
+#pedidoList .pedido {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#pedidoList .pedido .adicionais,
+#pedidoList .pedido .frutas {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montar Açaí - Açaí Delícia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Monte seu Açaí</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="montar-acai.html">Montar Açaí</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="container">
+        <h2>Escolha os ingredientes para o seu Açaí</h2>
+        <form id="acaiForm">
+            <!-- Tamanho -->
+            <div class="card">
+                <h3>Escolha o Tamanho:</h3>
+                <select id="tamanho" name="tamanho">
+                    <option value="pequeno" data-preco="10">Pequeno - R$ 10,00</option>
+                    <option value="medio" data-preco="15">Médio - R$ 15,00</option>
+                    <option value="grande" data-preco="20">Grande - R$ 20,00</option>
+                </select>
+            </div>
+
+            <!-- Adicionais -->
+            <div class="card">
+                <h3>Adicionais:</h3>
+                <div class="opcoes">
+                    <label for="leiteCondensado">
+                        <input type="checkbox" id="leiteCondensado" name="adicional" value="leiteCondensado" data-preco="2">
+                        Leite Condensado (R$ 2,00)
+                    </label>
+                    <label for="ovomaltine">
+                        <input type="checkbox" id="ovomaltine" name="adicional" value="ovomaltine" data-preco="3">
+                        Ovomaltine (R$ 3,00)
+                    </label>
+                    <label for="nutella">
+                        <input type="checkbox" id="nutella" name="adicional" value="nutella" data-preco="4">
+                        Nutella (R$ 4,00)
+                    </label>
+                    
+                </div>
+            </div>
+
+            <!-- Frutas -->
+            <div class="card">
+                <h3>Escolha as Frutas:</h3>
+                <div class="opcoes">
+                    <label for="banana">
+                        <input type="checkbox" id="banana" name="fruta" value="banana" data-preco="1">
+                        Banana (R$ 1,00)
+                    </label>
+                    <label for="morango">
+                        <input type="checkbox" id="morango" name="fruta" value="morango" data-preco="1.5">
+                        Morango (R$ 1,50)
+                    </label>
+                    <label for="kiwi">
+                        <input type="checkbox" id="kiwi" name="fruta" value="kiwi" data-preco="2">
+                        Kiwi (R$ 2,00)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Contato -->
+            <div class="card">
+                <label for="contato">Telefone ou WhatsApp:</label>
+                <input type="tel" id="contato" name="contato" placeholder="Digite seu número"><br><br>
+            </div>
+            <div class="card">
+                <label for="nome">Nome Completo:</label>
+                <input type="tel" id="nome" name="nome" placeholder="Digite seu nome completo"><br><br>
+            </div>
+
+            <button type="submit" id="formSubmit">Confirmar Pedido</button>
+
+            <h3>Total: R$ <span id="total">0,00</span></h3>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Açaí Delícia. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Função para adicionar o pedido ao localStorage
+        function adicionarPedido(pedido) {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    
+            // Verifica se o pedido já está no localStorage para evitar duplicação
+            let existe = pedidos.some(function(p) {
+                return p.tamanho === pedido.tamanho && 
+                       JSON.stringify(p.adicionais.sort()) === JSON.stringify(pedido.adicionais.sort()) && 
+                       JSON.stringify(p.frutas.sort()) === JSON.stringify(pedido.frutas.sort());
+            });
+    
+            if (!existe) {
+                pedidos.push(pedido);
+                localStorage.setItem('pedidos', JSON.stringify(pedidos));
+            }
+        }
+    
+        // Função que lida com o envio do formulário
+        document.getElementById('acaiForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário e recarregamento da página
+    
+            // Coleta os dados do formulário
+            let tamanho = document.getElementById('tamanho').value;
+            let adicionais = [];
+            let frutas = [];
+            let total = parseFloat(document.querySelector('option[value="'+tamanho+'"]').getAttribute('data-preco'));
+    
+            // Adiciona os adicionais selecionados
+            document.querySelectorAll('input[name="adicional"]:checked').forEach(function(adicional) {
+                adicionais.push(adicional.value);
+                total += parseFloat(adicional.getAttribute('data-preco'));
+            });
+    
+            // Adiciona as frutas selecionadas
+            document.querySelectorAll('input[name="fruta"]:checked').forEach(function(fruta) {
+                frutas.push(fruta.value);
+                total += parseFloat(fruta.getAttribute('data-preco'));
+            });
+    
+            // Coleta o contato
+            let contato = document.getElementById('contato').value;
+    
+            // Cria o objeto do pedido
+            let pedido = {
+                tamanho: tamanho,
+                adicionais: adicionais,
+                frutas: frutas,
+                contato: contato,
+                total: total
+            };
+    
+            // Adiciona o pedido ao localStorage
+            adicionarPedido(pedido);
+    
+            // Exibe a mensagem de sucesso
+            alert("Pedido confirmado! Entraremos em contato em breve.");
+    
+            // Limpa o formulário
+            document.getElementById('acaiForm').reset();
+    
+            // Atualiza o total na tela
+            document.getElementById('total').textContent = '0,00';
+        });
+    </script>
+</body>
+</html>

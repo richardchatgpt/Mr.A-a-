@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Açaí - Página Inicial</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos gerais para centralizar o conteúdo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Adicionando a imagem de fundo com opacidade */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://alphagel.com.br/wp-content/uploads/2021/08/alphagel_alphagel_image_997.jpeg'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4; /* Define a opacidade da imagem de fundo */
+            z-index: -1; /* Garante que a imagem de fundo fique atrás de todo o conteúdo */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 10px;
+            color: #333;
+        }
+
+        /* Logo */
+        #logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color:  #854d58;
+        }
+
+        /* Seção Sobre */
+        #about {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 20px;
+        }
+
+        #about h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Logo -->
+        <img id="logo" src="logoacai.jpeg" alt="Logo Açaí Delícia"> <!-- Coloque sua logo aqui -->
+        <h1>Mr Açaí</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre Nós</a></li>
+                <li><a href="montar-acai.html">Montar Açaí</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>Bem-vindo ao Açaí Delícia</h2>
+        <p>Em nosso site, você pode montar seu próprio açaí, escolher os ingredientes e fazer seu pedido de maneira rápida e fácil!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Mr Açaí. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
